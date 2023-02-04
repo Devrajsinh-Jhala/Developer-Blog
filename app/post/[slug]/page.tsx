@@ -4,12 +4,15 @@ import React from "react";
 import urlFor, { sanityClient } from "../../../sanity";
 import { PortableText } from "@portabletext/react";
 import { RichTextComponents } from "../../../components/RichTextComponents";
+import FormComponent from "../../../components/FormComponent";
 
 type Props = {
   params: {
     slug: string;
   };
 };
+
+// Form Interface
 
 export const revalidate = 86400; // revalidate after one day
 export async function generateStaticParams() {
@@ -27,12 +30,27 @@ export async function generateStaticParams() {
 async function Post({ params: { slug } }: Props) {
   const query = groq`
     *[_type=="post" && slug.current == $slug][0]{
-        ...,
-        author->,
-        categories[]->,
+      "comments": *[
+  _type == "comment" && post._ref == ^._id && approved == true
+],
+author->{
+name,
+  image,
+  bio
+},
+        categories[]->{
+          title,
+        },
+title,
+description,
+slug,
+mainImage,
+body
     }
     `;
   const post: Post = await sanityClient.fetch(query, { slug });
+
+  // Comments function -> Form fuction
 
   return (
     <article className="px-10 pb-28">
@@ -48,27 +66,34 @@ async function Post({ params: { slug } }: Props) {
           </div>
           <section className="p-5 bg-[#f7ab0a] w-full">
             <div className="flex flex-col md:flex-row justify-between gap-y-5">
-              <div>
+              <div className="space-y-2">
                 <h1 className="text-4xl font-bold">{post.title}</h1>
-                <p>
+
+                {/* <p>
                   {new Date(post._createdAt).toLocaleDateString("en-US", {
                     day: "numeric",
                     month: "long",
                     year: "numeric",
                   })}
-                </p>
+                </p> */}
               </div>
               <div className="flex items-center space-x-2">
-                <Image
-                  className="rounded-full"
-                  src={urlFor(post.author.image).url()}
-                  alt={post.author.name}
-                  height={40}
-                  width={40}
-                />
+                {post.author.image && (
+                  <Image
+                    className="rounded-full"
+                    src={urlFor(post.author.image).url()}
+                    alt={post.author.name}
+                    height={40}
+                    width={40}
+                  />
+                )}
                 <div className="w-64">
                   <h3 className="text-lg font-bold">{post.author.name}</h3>
                   {/* Author Bio */}
+                  <PortableText
+                    value={post.author.bio}
+                    components={RichTextComponents}
+                  />
                 </div>
               </div>
             </div>
@@ -83,12 +108,32 @@ async function Post({ params: { slug } }: Props) {
                   </p>
                 ))}
               </div>
+              <p className="text-white ">{post.description}</p>
             </div>
           </section>
         </div>
       </section>
 
-      <PortableText value={post.body} components={RichTextComponents} />
+      <article className="my-10">
+        <PortableText value={post.body} components={RichTextComponents} />
+      </article>
+
+      <hr className="border-[#f7ab0a] border" />
+
+      <FormComponent post={post} />
+
+      {/* Comments */}
+      <div>
+        <h3>Comments</h3>
+        <hr />
+        {post.comments.map((comment, i) => (
+          <div key={i}>
+            <p key={i}>
+              {comment.name}: {comment.comment}
+            </p>
+          </div>
+        ))}
+      </div>
     </article>
   );
 }

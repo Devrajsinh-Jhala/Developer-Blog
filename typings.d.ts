@@ -14,6 +14,18 @@ interface Post extends SanityBody {
   slug: Slug;
   title: string;
   description: string;
+  comments: Comment[];
+}
+
+interface Comment extends SanityBody {
+  approved: boolean;
+  comment: string;
+  email: string;
+  name: string;
+  post: {
+    _ref: string;
+    _type: string;
+  };
 }
 
 interface Author extends Base {

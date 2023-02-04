@@ -15,7 +15,11 @@ const query = groq`
 
 const Home = async (props: Props) => {
   const posts = await sanityClient.fetch(query);
-  return <BlogList posts={posts} />;
+  return (
+    <>
+      <BlogList posts={posts} />
+    </>
+  );
 };
 
 export default Home;
