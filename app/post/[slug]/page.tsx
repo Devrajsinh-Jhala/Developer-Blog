@@ -45,7 +45,12 @@ title,
 description,
 slug,
 mainImage,
-body
+body,
+_id,
+_createdAt,
+_rev,
+_type,
+_updatedAt
     }
     `;
   const post: Post = await sanityClient.fetch(query, { slug });

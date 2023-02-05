@@ -20,8 +20,8 @@ const FormComponent = ({ post }: Props) => {
     formState: { errors },
   } = useForm<FormInput>();
 
-  const onSubmit: SubmitHandler<FormInput> = async (data) => {
-    await fetch("/api/createComment", {
+  const onSubmit: SubmitHandler<FormInput> = (data) => {
+    fetch("/api/createComment", {
       method: "POST",
       body: JSON.stringify(data),
     })
@@ -31,7 +31,6 @@ const FormComponent = ({ post }: Props) => {
       .catch((err) => {
         console.log(err);
       });
-    // console.log(data);
   };
   return (
     <form

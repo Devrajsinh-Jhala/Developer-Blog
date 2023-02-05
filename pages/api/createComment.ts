@@ -2,10 +2,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import sanityClient from "@sanity/client";
 
-type Data = {
-  name: string;
-};
-
 const config = {
   dataset: "production",
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -18,7 +14,7 @@ const client = sanityClient(config);
 
 export default async function createComment(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
   const { _id, name, email, comment } = JSON.parse(req.body);
   // Sanity Mutation
@@ -34,8 +30,10 @@ export default async function createComment(
       comment,
     });
   } catch (error) {
-    console.log(error);
+    return res
+      .status(500)
+      .json({ message: "Could'nt send the message", error });
   }
-  res.status(200);
-  console.log("Comment Successfull");
+  console.log("Comment Sent");
+  res.status(200).json({ message: "Comment Sent successfully" });
 }
