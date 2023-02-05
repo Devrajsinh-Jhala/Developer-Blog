@@ -50,8 +50,6 @@ body
     `;
   const post: Post = await sanityClient.fetch(query, { slug });
 
-  // Comments function -> Form fuction
-
   return (
     <article className="px-10 pb-28">
       <section className="space-y-2 border border-[#f7ab0a] text-white">
@@ -99,10 +97,10 @@ body
             </div>
             <div>
               <div className="flex items-center justify-end mt-auto space-x-2">
-                {post.categories.map((category) => (
+                {post.categories.map((category, i) => (
                   <p
                     className="bg-gray-800 text-white px-3 py-1 rounded-full text-sm font-semibold mt-4"
-                    key={category._id}
+                    key={i}
                   >
                     {category.title}
                   </p>
@@ -120,18 +118,19 @@ body
 
       <hr className="border-[#f7ab0a] border" />
 
-      <FormComponent post={post} />
+      <div className="my-5">
+        <FormComponent post={post} />
+      </div>
 
       {/* Comments */}
-      <div>
-        <h3>Comments</h3>
-        <hr />
+      <div className="flex flex-col p-10 my-10 max-w-2xl mx-auto shadow-yellow-500 shadow space-y-2">
+        <h3 className="text-4xl">Comments</h3>
+        <hr className="pb-2" />
         {post.comments.map((comment, i) => (
-          <div key={i}>
-            <p key={i}>
-              {comment.name}: {comment.comment}
-            </p>
-          </div>
+          <p key={i}>
+            <span className="text-yellow-500">{comment.name}: </span>{" "}
+            {comment.comment}
+          </p>
         ))}
       </div>
     </article>

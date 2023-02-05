@@ -27,11 +27,9 @@ const FormComponent = ({ post }: Props) => {
     })
       .then(() => {
         console.log(data);
-        setSubmitted(true);
       })
       .catch((err) => {
         console.log(err);
-        setSubmitted(false);
       });
     // console.log(data);
   };
@@ -40,9 +38,8 @@ const FormComponent = ({ post }: Props) => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col p-5 max-w-2xl mx-auto mb-10"
     >
-      <h3 className="text-sm text-yellow-500">Enjoyed the article?</h3>
-      <h4 className="text-3xl font-bold">Leave a comment below!</h4>
-
+      <h3 className="text-sm  text-yellow-500">Enjoyed the article?</h3>
+      <h4 className="text-3xl mb-10 font-bold">Leave a comment below!</h4>
       <input {...register("_id")} type={"hidden"} name="_id" value={post._id} />
 
       <label className="mb-5 block">
@@ -51,7 +48,7 @@ const FormComponent = ({ post }: Props) => {
           {...register("name", { required: true })}
           className="shadow border rounded py-2 px-3 mt-1 block w-full ring-yellow-500"
           type="text"
-          placeholder="Enter the Name"
+          placeholder="Enter your Name"
         />
       </label>
       <label className="mb-5 block">
@@ -60,16 +57,16 @@ const FormComponent = ({ post }: Props) => {
           {...register("email", { required: true })}
           className="shadow border rounded py-2 px-3 mt-1 block w-full ring-yellow-500"
           type="email"
-          placeholder="Enter the Name"
+          placeholder="Enter your Email"
         />
       </label>
       <label className="mb-5 block">
         <span className="text-gray-700 ">Comment</span>
         <textarea
           {...register("comment", { required: true })}
-          className="shadow border rounded py-2 px-3 mt-1 block w-full ring-yellow-500"
+          className="shadow border resize-none rounded py-2 px-3 mt-1 block w-full ring-yellow-500"
           rows={8}
-          placeholder="Enter the Name"
+          placeholder="Enter your feedback or message"
         />
       </label>
 
