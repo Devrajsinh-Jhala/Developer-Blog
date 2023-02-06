@@ -14,7 +14,7 @@ type Props = {
 
 // Form Interface
 
-export const revalidate = 800; // revalidate after one day
+export const revalidate = 86400; // revalidate after one day
 export async function generateStaticParams() {
   const query = groq`*[_type == 'post']{
         slug
