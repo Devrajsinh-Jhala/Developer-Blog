@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Button from "./Button";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import Link from "next/link";
-import { FiArrowUpRight } from "react-icons/fi";
 
 const Navbar = () => {
   let Links = [{ name: "About", links: "/about" }];
