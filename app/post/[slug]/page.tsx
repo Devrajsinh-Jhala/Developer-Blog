@@ -14,7 +14,7 @@ type Props = {
 
 // Form Interface
 
-export const revalidate = 86400; // revalidate after one day
+export const revalidate = 800; // revalidate after one day
 export async function generateStaticParams() {
   const query = groq`*[_type == 'post']{
         slug
@@ -72,13 +72,13 @@ _updatedAt
               <div className="space-y-2">
                 <h1 className="text-4xl font-bold">{post.title}</h1>
 
-                {/* <p>
+                <p>
                   {new Date(post._createdAt).toLocaleDateString("en-US", {
                     day: "numeric",
                     month: "long",
                     year: "numeric",
                   })}
-                </p> */}
+                </p>
               </div>
               <div className="flex items-center space-x-2">
                 {post.author.image && (

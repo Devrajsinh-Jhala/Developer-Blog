@@ -13,7 +13,6 @@ interface FormInput {
 }
 
 const FormComponent = ({ post }: Props) => {
-  const [submitted, setSubmitted] = useState(false);
   const {
     register,
     handleSubmit,
