@@ -46,7 +46,7 @@ const Navbar = () => {
             <a
               className="flex items-center justify-center"
               target={"_blank"}
-              rel={"noopener"}
+              rel={"noopener noreferrer"}
               href="https://devraj-jhala.hashnode.dev/"
             >
               <Button className="cursor-pointer hover:underline  flex">
