@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 import "./globals.css";
 
@@ -17,6 +18,9 @@ export default function RootLayout({
       <body className="max-w-[900px] mx-auto">
         <Header />
         {children}
+        <footer>
+          <Footer />
+        </footer>
       </body>
     </html>
   );

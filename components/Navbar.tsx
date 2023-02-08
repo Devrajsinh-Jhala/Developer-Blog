@@ -32,12 +32,12 @@ const Navbar = () => {
               key={link.name}
               className="md:ml-8 text-base md:my-0 my-7 font-inter"
             >
-              <a
+              <Link
                 className="text-gray-800 hover:text-[#e15353] font-semibold duration-500"
                 href={link.links}
               >
                 {link.name}
-              </a>
+              </Link>
             </li>
           ))}
           <div className="flex  md:ml-4 flex-col items-center md:flex-row gap-5 md:gap-0">

@@ -8,7 +8,7 @@ const Header = (props: Props) => {
   return (
     <header className="mx-auto w-full">
       <Navbar />
-      <Card />
+      {/* <Card /> */}
     </header>
   );
 };
