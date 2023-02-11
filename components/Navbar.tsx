@@ -23,8 +23,8 @@ const Navbar = () => {
           {open === true ? <AiOutlineClose /> : <AiOutlineMenu />}
         </div>
         <ul
-          className={`md:flex text-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto left-0 w-full z-[-1] md:pl-0  md:w-auto md:items-center transition-all duration-500 ease-in ${
-            open ? "top-20" : "top-[-490px]"
+          className={`md:flex text-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto left-0 w-full z-50 md:pl-0  md:w-auto md:items-center transition-all duration-500 ease-in ${
+            open ? "top-14" : "top-[-490px]"
           } `}
         >
           {Links.map((link) => (

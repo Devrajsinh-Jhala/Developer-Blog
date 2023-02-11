@@ -56,10 +56,10 @@ _updatedAt
   const post: Post = await sanityClient.fetch(query, { slug });
 
   return (
-    <article className="px-10 pb-28">
+    <article className="px-10  pb-28">
       <section className="space-y-2 border border-[#f7ab0a] text-white">
-        <div className="relative min-h-56 flex flex-col md:flex-row justify-between">
-          <div className="absolute top-0 w-full h-full opacity-10 blur-sm p-10">
+        <div className="relative z-[-10] min-h-56 flex flex-col md:flex-row justify-between">
+          <div className="absolute z-[-10] top-0 w-full h-full opacity-10 blur-sm p-10">
             <Image
               className="object-cover object-center mx-auto"
               src={urlFor(post.mainImage).url()}
@@ -129,14 +129,20 @@ _updatedAt
 
       {/* Comments */}
       <div className="flex flex-col p-10 my-10 max-w-2xl mx-auto shadow-yellow-500 shadow space-y-2">
-        <h3 className="text-4xl">Comments</h3>
+        <h3 className="text-4xl">Comments:</h3>
         <hr className="pb-2" />
-        {post.comments.map((comment, i) => (
-          <p key={i}>
-            <span className="text-yellow-500">{comment.name}: </span>{" "}
-            {comment.comment}
+        {post.comments &&
+          post.comments.map((comment, i) => (
+            <p key={i}>
+              <span className="text-yellow-500">{comment.name}: </span>{" "}
+              {comment.comment}
+            </p>
+          ))}
+        {post.comments.length == 0 && (
+          <p className="text-lg text-[#f7ab07] font-bold">
+            Be the first one to comment!
           </p>
-        ))}
+        )}
       </div>
     </article>
   );
