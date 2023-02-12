@@ -5,8 +5,6 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import Link from "next/link";
 
 const Navbar = () => {
-  let Links = [{ name: "About", links: "/about" }];
-
   let [open, setOpen] = useState(false);
   return (
     <div className=" w-full sticky top-0 left-0">
@@ -27,7 +25,7 @@ const Navbar = () => {
             open ? "top-14" : "top-[-490px]"
           } `}
         >
-          {Links.map((link) => (
+          {/* {Links.map((link) => (
             <li
               key={link.name}
               className="md:ml-8 text-base md:my-0 my-7 font-inter"
@@ -39,7 +37,7 @@ const Navbar = () => {
                 {link.name}
               </Link>
             </li>
-          ))}
+          ))} */}
           <div className="flex  md:ml-4 flex-col items-center md:flex-row gap-5 md:gap-0">
             {/* <Button>Checkout more blogs</Button> */}
             <a
