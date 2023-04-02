@@ -110,7 +110,7 @@ const FormComponent = ({ post }: Props) => {
               <h1 className="text-2xl font-bold">Please Sign In!!!</h1>
               <h1 className="">
                 We appreciate your time but please sign in to make a comment on
-                this post. Can't wait to hear your feedback! Thank you.
+                this post. Cant wait to hear your feedback! Thank you.
               </h1>
             </div>
           )}
