@@ -1,4 +1,5 @@
 "use client";
+import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -13,6 +14,7 @@ interface FormInput {
 }
 
 const FormComponent = ({ post }: Props) => {
+  const { data: session } = useSession();
   const {
     register,
     handleSubmit,
@@ -98,10 +100,20 @@ const FormComponent = ({ post }: Props) => {
             )}
           </div>
 
-          <input
-            type="submit"
-            className="shadow bg-yellow-500 hover:bg-yellow-400 focus:outline-none text-white font-bold py-2 px-4 rounded cursor-pointer"
-          />
+          {session ? (
+            <input
+              type="submit"
+              className="shadow bg-yellow-500 hover:bg-yellow-400 focus:outline-none text-white font-bold py-2 px-4 rounded cursor-pointer"
+            />
+          ) : (
+            <div className="flex flex-col p-10 my-10 bg-yellow-500 text-white max-w-2xl mx-auto">
+              <h1 className="text-2xl font-bold">Please Sign In!!!</h1>
+              <h1 className="">
+                We appreciate your time but please sign in to make a comment on
+                this post. Can't wait to hear your feedback! Thank you.
+              </h1>
+            </div>
+          )}
         </form>
       )}
     </section>

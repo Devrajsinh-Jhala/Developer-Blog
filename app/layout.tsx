@@ -1,13 +1,28 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { Session } from "next-auth";
+import { headers } from "next/headers";
+import AuthContext from "./AuthContext";
+
+async function getSession(cookie: string): Promise<Session> {
+  const response = await fetch(
+    `${process.env.LOCAL_AUTH_URL}/api/auth/session`
+  );
+
+  const session = await response.json();
+
+  return Object.keys(session).length > 0 ? session : null;
+}
 
 import "./globals.css";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
+  pageProps: any;
 }) {
+  const session = await getSession("");
   return (
     <html lang="en">
       {/*
@@ -16,11 +31,13 @@ export default function RootLayout({
       */}
       <head />
       <body className="max-w-[900px] mx-auto">
-        <Header />
-        {children}
-        <footer>
-          <Footer />
-        </footer>
+        <AuthContext session={session}>
+          <Header />
+          {children}
+          <footer>
+            <Footer />
+          </footer>
+        </AuthContext>
       </body>
     </html>
   );
