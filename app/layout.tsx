@@ -2,10 +2,16 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Session } from "next-auth";
 import AuthContext from "../components/AuthContext";
+import { headers } from "next/headers";
 
 async function getSession(cookie: string): Promise<Session> {
   const response = await fetch(
-    `${process.env.LOCAL_AUTH_URL}/api/auth/session`
+    `${process.env.LOCAL_AUTH_URL}/api/auth/session`,
+    {
+      headers: {
+        cookie,
+      },
+    }
   );
 
   const session = await response.json();
@@ -20,7 +26,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getSession("");
+  const session = await getSession(headers().get("cookie") ?? "");
   return (
     <html lang="en">
       {/*
