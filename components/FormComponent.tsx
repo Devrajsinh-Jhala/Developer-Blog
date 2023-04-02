@@ -99,6 +99,20 @@ const FormComponent = ({ post }: Props) => {
               <span className="text-red-500">The comment is required</span>
             )}
           </div>
+          {session ? (
+            <input
+              type="submit"
+              className="shadow bg-yellow-500 hover:bg-yellow-400 focus:outline-none text-white font-bold py-2 px-4 rounded cursor-pointer"
+            />
+          ) : (
+            <div className="flex flex-col p-10 my-10 bg-yellow-500 text-white max-w-2xl mx-auto">
+              <h1 className="text-2xl font-bold">Please Sign In to comment</h1>
+              <h1 className="">
+                I really appreciate your time for reading this blog but to
+                comment please sign in. Thank You.
+              </h1>
+            </div>
+          )}
         </form>
       )}
     </section>
