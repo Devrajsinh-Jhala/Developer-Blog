@@ -1,7 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Session } from "next-auth";
-import { headers } from "next/headers";
 import AuthContext from "./AuthContext";
 
 async function getSession(cookie: string): Promise<Session> {
@@ -20,7 +19,6 @@ export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-  pageProps: any;
 }) {
   const session = await getSession("");
   return (
